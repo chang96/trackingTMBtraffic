@@ -1,0 +1,19 @@
+{
+  "name": "gmt",
+  "version": "1.0.0",
+  "description": "google map traffic data collector",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.11",
+    "google-spreadsheet": "^3.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
