@@ -1,3 +1,5 @@
+const app = require("express")()
+const PORT = process.env.PORT || 3001
 const {Client} = require("@googlemaps/google-maps-services-js");
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const client = new Client({});
@@ -9,6 +11,13 @@ setInterval(async function(){
   await getMapDetails({origin_lat: 6.54, origin_long: 3.39, destination_lat: 6.46, destination_long: 3.39})
 }, 1000 * 60 * 15)
 
+app.get("/", function(req, res){
+  res.send("Still running...")
+})
+
+app.listen(PORT, function(PORT){
+  console.log("running now")
+})
 
   // async function gs(toIsland, toMainland){
 
