@@ -7,7 +7,6 @@ const { promisify } = require("util")
 const creds = require("./client_secret.json")
 const {getMapDetails} = require("./utils")
 const {getMapDetailsGhana} = require("./util2")
-const doc = new GoogleSpreadsheet("1Zb82JiV4JGOExijUBbTDFCfDRaqqoPQETILf37eA0hY")
 
 const itom = {
   origin_lat: 6.5455556,
@@ -34,23 +33,6 @@ setInterval(async function(){
   }, "mtoi")
 }, 1000 * 60 * 15)
 
-// setInterval(async function(){
-//   await getMapDetailsGhana({origin_lat: 5.708569, origin_long: 0.171137, destination_lat: 5.554984, destination_long: 0.200785})
-// }, 1000 * 60 * 15)
-
-
-
-//6.5455556, 3.3980556 m
-//6.4627778, 3.3941667 i
-
-
-// C - 6.4630556, 3.3941667 i
-// D - 6.5455556, 3.3983333 m
-
-// origin_lat: 6.5455556,
-// origin_long: 3.3983333, 
-// destination_lat: 6.4630556, 
-// destination_long: 3.3941667,
 
 app.get("/", function(req, res){
   res.send("Still running...")

@@ -2,7 +2,7 @@ const creds = require("./client_secret.json")
 const {Client} = require("@googlemaps/google-maps-services-js");
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const client = new Client({});
-const doc = new GoogleSpreadsheet("1Zb82JiV4JGOExijUBbTDFCfDRaqqoPQETILf37eA0hY")
+const doc = new GoogleSpreadsheet(process.env.googleDoc)
 
 async function gs(toIsland, toMainland, where){
 
