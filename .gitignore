@@ -1,4 +1,4 @@
 node_modules
-/client_secret.json
+client_secret.json
 .env
-/util2.js
+util2.js
