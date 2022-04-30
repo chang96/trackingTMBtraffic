@@ -6,7 +6,6 @@ const client = new Client({});
 const { promisify } = require("util")
 const creds = require("./client_secret.json")
 const {getMapDetails} = require("./utils")
-const {getMapDetailsGhana} = require("./util2")
 
 const itom = {
   origin_lat: 6.5455556,
