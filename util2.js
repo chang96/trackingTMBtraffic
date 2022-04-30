@@ -2,9 +2,9 @@ const creds = require("./client_secret.json")
 const {Client} = require("@googlemaps/google-maps-services-js");
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const client = new Client({});
-const doc = new GoogleSpreadsheet("1Zb82JiV4JGOExijUBbTDFCfDRaqqoPQETILf37eA0hY")
+const doc = new GoogleSpreadsheet("1xnKya_ZaYkuSOaxSKFcpK5oyMFWoJJ2CfiYAJgoPwSA")
 
-async function gs(toIsland, toMainland, where){
+async function gs(toIsland, toMainland){
 
   await doc.useServiceAccountAuth({
     client_email: creds.client_email,
@@ -15,18 +15,17 @@ async function gs(toIsland, toMainland, where){
   // const sh = await doc.addSheet({
   //   headerValues:["timestamp", "origin", "destination", "duration", "distance", "toIsland", "toMainland"]
   // })
-  where === "itom"?  await sheet.addRows([toMainland]) :  await sheet.addRows([toIsland])
- 
+  await sheet.addRows([toIsland, toMainland])
 }
 
 
-async function getMapDetails({
+async function getMapDetailsGhana({
     origin_lat,
     origin_long,
     destination_lat,
     destination_long,
     
-}, where){
+}){
     client.distancematrix({
         params: {
           key: "AIzaSyD1Mcw5Ifbm_8YosXj-ca1uy20lLtBSmoM",
@@ -60,35 +59,35 @@ async function getMapDetails({
   
     }).then(async data=> {
       let d = data.data
-      // console.log(d.rows[0].elements)
+      console.log(d.rows[1].elements)
       let destination = d["destination_addresses"]
       let origin = d["origin_addresses"]
       let row1 = d["rows"][0].elements
       let row2 = d["rows"][1].elements
    
       console.log({
-          // destination1: destination[0],
-          // origin1: origin[0],
-          // destination2: destination[1],
-          // origin2: origin[1],
-          // mainLandToIslandDuration: row1[0].duration_in_traffic.text,
-          // mainLandToIslandDistance: row1[0].distance.text,
-          // islandToMainlandDuration:row2[1].duration_in_traffic.text,
-          // islandToMainlandDistance: row2[1].distance.text,
-          // row1: row1,
-          // row2: row2,
-          // distance11: row1[0].distance,
-          // duration11: row1[0].duration_in_traffic,
-          // xduration11: row1[0].duration.text,
-          // distance12: row1[1].distance,
-          // duration12: row1[1].duration_in_traffic,
-          // xduration12: row1[1].duration.text,
-          // distance21: row2[0].distance,
-          // duration21: row2[0].duration_in_traffic,
-          // xduration21: row2[0].duration.text,
-          // distance22: row2[1].distance,
-          // duration22: row2[1].duration_in_traffic,
-          // xduration22: row2[1].duration.text
+          destination1: destination[0],
+          origin1: origin[0],
+          destination2: destination[1],
+          origin2: origin[1],
+          mainLandToIslandDuration: row1[0].duration_in_traffic.text,
+          mainLandToIslandDistance: row1[0].distance.text,
+          islandToMainlandDuration:row2[1].duration_in_traffic.text,
+          islandToMainlandDistance: row2[1].distance.text,
+          row1: row1,
+          row2: row2,
+          distance11: row1[0].distance,
+          duration11: row1[0].duration_in_traffic,
+          xduration11: row1[0].duration.text,
+          distance12: row1[1].distance,
+          duration12: row1[1].duration_in_traffic,
+          xduration12: row1[1].duration.text,
+          distance21: row2[0].distance,
+          duration21: row2[0].duration_in_traffic,
+          xduration21: row2[0].duration.text,
+          distance22: row2[1].distance,
+          duration22: row2[1].duration_in_traffic,
+          xduration22: row2[1].duration.text
       })
       let toIsland = {
         timestamp: Date.now(),
@@ -108,8 +107,8 @@ async function getMapDetails({
         toMainland: "true",
         toIsland: "false",
       }
-      console.log(toMainland, toIsland)
-      await gs(toIsland, toMainland, where)
+    //   console.log(toMainland, toIsland)
+      await gs(toIsland, toMainland)
     
     }).catch((e) => {
     console.log(e); //.rows[0].elements
@@ -118,14 +117,5 @@ async function getMapDetails({
 
 
 module.exports = {
-    getMapDetails
+    getMapDetailsGhana
 }
-
-//6 27 46 3 23 38
-
-//6.5455556, 3.3980556 m
-//6.4627778, 3.3941667 i
-
-
-// C - 6.4630556, 3.3941667 i
-// D - 6.5455556, 3.3983333 m
